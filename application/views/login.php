@@ -49,7 +49,7 @@
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">New to site?
+                <p class="change_link">
                   <a href="#signup" class="to_register"> Create Account </a>
                 </p>
 
@@ -57,8 +57,8 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>© 2016 All Rights Reserved.</p>
+                  <h1><i class="fa fa-paw"></i> Relawan !</h1>
+                  
                 </div>
               </div>
             </form>
@@ -79,7 +79,7 @@
                 <input type="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Submit</a>
+                <a class="btn btn-default submit" href="index.html">Daftar</a>
               </div>
 
               <div class="clearfix"></div>
@@ -93,8 +93,8 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>© 2016 All Rights Reserved.</p>
+                  <h1><i class="fa fa-paw"></i> Relawan!</h1>
+                  <p></p>
                 </div>
               </div>
             </form>

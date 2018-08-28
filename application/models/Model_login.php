@@ -8,20 +8,21 @@ class Model_login extends CI_Model {
 		$this->db->where('email', $user);
 		$this->db->where('password', $inipass);
 		$this->db->where('status', 1);
-
+		
 		$query = $this->db->get('tb_relawan');
 
 		if ($query->num_rows()>0) {
 		 	# code...
 		 	foreach ($query->result() as $roww) {
 		 		# code...
-		 		$sessiondata = array('id_relawan' => $roww->id_admin,
-		 							 'email' => $roww->username,
-                                     'pass_relawan' => $roww->password,
+				 $sessiondata = array(	'id_relawan' => $roww->id_relawan,
+										'id_caleg' => $roww->id_caleg,
+										'nama_relawan' => $roww->nama_caleg,
+										'email' => $roww->username,
+										'pass_relawan' => $roww->password,
 		 							);
 
 		 		$this->session->set_userdata($sessiondata);
-
 		 		redirect('dashboard');
 		 	}
 

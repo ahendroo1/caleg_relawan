@@ -8,14 +8,32 @@
                         <h4 class="modal-title" id="myModalLabel">Tambah Caleg</h4>
                     </div>
                     <div class="modal-body">
-                        <form  action="<?php echo base_url() ?>caleg/caleg_add" method="post" enctype="multipart/form-data">
+                        <form  action="<?php echo base_url() ?>caleg/relawan_add" method="post" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Nama Caleg</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" name="nama_caleg" placeholder="Nama" required>
+                                <label for="exampleInputEmail1">Caleg</label>
+                                <select class="form-control" name='id_caleg'>
+                                    <option>- Pilih -</option>
+                                    <?php
+                                        foreach($list_caleg->result() as $opt_caleg){
+                                            echo "<option value='".$opt_caleg->id_caleg."'>".$opt_caleg->nama_caleg."</option>";
+                                        }
+                                    ?>
+                                </select>
                             </div>
+
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Partai</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" name="partai" placeholder="Partai" required>
+                                <label for="exampleInputEmail1">Nama Relawan</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" name="nama_relawan" placeholder="Nama" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Email</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" name="email" placeholder="Email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" name="pass" placeholder="Password" required>
                             </div>
                     </div>
                     <div class="modal-footer">
@@ -29,7 +47,7 @@
           <div class="row">
             <div class="x_panel">
                 <div class="x_title">
-                <h2>Caleg <small>___</small></h2>
+                <h2>Relawan Caleg <small>___</small></h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target=".bs-example-modal-lg">Tambah</button>
                 </ul>
@@ -48,6 +66,7 @@
                     <thead>
                     <tr>
                         <th>No</th>
+                        <th>Caleg</th>
                         <th>Nama</th>
                         <th>Partai</th>
                         <th>Action</th>
@@ -55,19 +74,17 @@
                     </thead>
 
                     <tbody>
-
                         <?php
                             $no = 1 ;
-                            foreach ($list_caleg->result() as $row_caleg) {
+                            foreach ($list_relawan->result() as $row_relawan) {
                         ?>
 
                         <tr>
                             <td><?php echo $no++ ?></td>
-                            <td><?php echo $row_caleg->nama_caleg?></td>
-                            <td><?php echo $row_caleg->partai?></td>
+                            <td><?php echo $row_relawan->nama_caleg?></td>
+                            <td><?php echo $row_relawan->nama_relawan?></td>
+                            <td><?php echo $row_relawan->email?></td>
                             <td>
-                                
-                                <button class="btn btn-primary btn-sm" >Relawan</button>
                                 <div class="btn-group pull-right">
                                     <button class="btn btn-success btn-sm" >Edit</button>
                                     <button class="btn btn-danger btn-sm" >Hapus</button>

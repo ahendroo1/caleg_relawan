@@ -6,14 +6,14 @@ class Caleg extends CI_Controller {
 	public function __construct(){
 
 		parent::__construct();
+		
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->library('session');
-		$this->load->model('Question');
-		$this->load->model('Model_login');
-        $this->load->helper('url');
-        $this->load->library('upload');
+		$this->load->library('upload');
         $this->load->model('Caleg_model');
+		date_default_timezone_set('Asia/Jakarta');
+		error_reporting(0);
         ini_set('display_error','off');
 		
 	}
@@ -21,62 +21,66 @@ class Caleg extends CI_Controller {
 	public function caleg_add(){
 
         if(!$this->session->userdata('pass_relawan')){
-            redirect('login');
-        } 
+			redirect('login');
+			
+		} else {
 
-        $this->load->library('upload');
+			$data_update =  array(  'id_caleg' => '',
+									'nama_caleg' => $this->input->post('nama_caleg'),
+									'partai' => $this->input->post('partai'),
+									// 'tgl_registrasi' => date("d F Y , g:i a"),
+								);
 
-        // date_default_timezone_set('Asia/Jakarta');
-		// $nmfile = time();
-        // $config['upload_path'] = './assets/img_upload/';
-        // $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp';
-        // $config['max_size'] = '999999999999999999999';
-		// $config['file_name'] = $nmfile; 
+			$this->Caleg_model->add_caleg($data_update);
 
-		$config['upload_path']          = './assets/img_upload/';
-		$config['allowed_types']        = 'gif|jpg|png|jpeg';
-		$config['max_size']             = 1000000;
-		// $config['file_name'] = $nmfile; 
-		$this->upload->initialize($config);
+			if ($this->db->affected_rows()) {
+				# code...
+				$this->session->set_flashdata('add_success', "<div class=\"alert alert-success\" id=\"alert\">Berhasil Tambah Data   !! </div>");
 
-		// $this->load->library('upload', $config);
-        
-            if ($this->upload->do_upload('filefoto')){
+				redirect(base_url().'caleg_data');
 
-                $gbr = $this->upload->data();
-				$data_update =  array(  'id_caleg' => '',
-										'nama_caleg' => $this->input->post('nama_caleg'),
-		    						  	'partai' => $this->input->post('partai'),
-		    						  	// 'tgl_registrasi' => date("d F Y , g:i a"),
-	                                 	'img_url' => base_url().'assets/img_upload/'.$gbr['file_name']
-		    						);
+			}else{
 
-				$this->Caleg_model->add_caleg($data_update);
+				$this->session->set_flashdata('add_success', "<div class=\"alert alert-danger\" id=\"alert\">Gagal Tambah Data   !! </div>");
 
-				if ($this->db->affected_rows()) {
-	                # code...
-	                 $this->session->set_flashdata('add_success', "<div class=\"alert alert-success\" id=\"alert\">Berhasil Tambah Foto   !! </div>");
+				redirect(base_url().'caleg_data');
+			}
+		}
+	}
+	
+	public function relawan_add(){
 
-		            redirect(base_url().'caleg_data');
+        if(!$this->session->userdata('pass_relawan')){
+			
+			redirect('login');
 
-	            }else{
+		} else {
 
-	                $this->session->set_flashdata('add_success', "<div class=\"alert alert-danger\" id=\"alert\">Gagal Tambah Foto   !! </div>");
+			$data_add = array('id_relawan' => '',
+							'id_caleg' => $this->input->post('id_caleg'),
+							'nama_relawan' => $this->input->post('nama_relawan'),
+							'email' => $this->input->post('email'),
+							'password' => $this->input->post('pass'),
+							'status' => 1
+			);
 
-		            redirect(base_url().'caleg_data');
-	            }
+			$this->Caleg_model->relawan_add($data_add);
 
-	        }else{
+			if ($this->db->affected_rows()) {
+				# code...
+				$this->session->set_flashdata('add_success', "<div class=\"alert alert-success\" id=\"alert\">Berhasil Tambah Data   !! </div>");
 
-                $this->session->set_flashdata('add_success', "<div class=\"alert alert-danger\" id=\"alert\">Gagal Tambah Foto 1   !! </div>");
+				redirect(base_url().'relawan_caleg');
 
-                redirect(base_url().'caleg_data');
+			}else{
 
-	        }
+				$this->session->set_flashdata('add_success', "<div class=\"alert alert-danger\" id=\"alert\">Gagal Tambah Data   !! </div>");
 
-    }
-    
-    public function out() {
-        
-    }
+				redirect(base_url().'relawan_caleg');
+			}
+
+
+		}
+
+	}
 }

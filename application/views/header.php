@@ -29,7 +29,6 @@
     <!-- Custom Theme Style -->
     <link href="<?php echo base_url() ?>assets/build/css/custom.min.css" rel="stylesheet">
     
-    
   </head>
 
   <body class="nav-md">
@@ -56,7 +55,7 @@
             <!-- /menu profile quick info -->
             <br />
 
-            <!-- sidebar menu -->
+            <!-- sidebar menu --> 
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>General</h3>
@@ -68,18 +67,21 @@
                   <li><a><i class="fa fa-user-secret"></i>Caleg <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url() ?>caleg_data">Data </a></li>
-                      <li><a href="<?php echo base_url() ?>caleg_survei">Survei</a></li>
+                      <li><a href="<?php echo base_url() ?>relawan_caleg">Relawan</a></li>
+                      <!-- <li><a href="<?php echo base_url() ?>caleg_survei">Survei</a></li> -->
                     </ul>
                   </li>
 
                   <li>
-                    <a href='<?php echo base_url() ?>question'><i class="fa fa-comments-o"></i>Question </a>
+                    <a href='<?php echo base_url() ?>questions'><i class="fa fa-comments-o"></i>Question </a>
+                  </li>
+                  <li>
+                    <a href='<?php echo base_url() ?>survei'><i class="fa fa-comments-o"></i>Survei </a>
                   </li>
 
                 </ul>
               </div>
-              
-
+            
             </div>
             <!-- /sidebar menu -->
 
@@ -113,17 +115,11 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="http://simpleicon.com/wp-content/uploads/user1.png" alt=""><?php echo $this->session->userdata('nama_relawan') ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
                     <li><a href="javascript:;">Help</a></li>
                     <li><a href="<?php echo base_url() ?>login/out"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
